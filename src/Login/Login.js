@@ -4,10 +4,9 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity,
     Platform,
     StatusBar,
-    KeyboardAvoidingView,
+    Dimensions
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -20,9 +19,9 @@ import { doLogin } from '../network/Network';
 import { ProgressDialog } from 'react-native-simple-dialogs';
 import { StackActions, NavigationActions } from "react-navigation";
 // MyCustomComponent = Animatable.createAnimatableComponent(MyCustomComponent);
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
 export var loggedInUserId = '0';
+
+const deviceWidth = Dimensions.get('window').width;
 export default class Login extends React.Component {
 
     constructor(props) {
@@ -131,12 +130,13 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <View style={styles.container}>
                     {(this.state.nextScreen) ?
                         <Animatable.View animation="fadeInUpBig" duration={800} >
                             <View style={styles.splashContainer}>
-                                <Image source={require('../../assets/logo.png')} />
+                                <Image source={require('../../assets/logo.png')}
+                                    style={{ width: 150, height: 150 }} />
                                 <Text style={{
                                     color: colors.colorPrimary,
                                     fontWeight: '600',
@@ -149,60 +149,59 @@ export default class Login extends React.Component {
                                     marginTop: 6,
                                     color: colors.colorBlack
                                 }}>Buddy</Text>
+
+                                {(this.state.login) ? null :
+                                    <View style={{
+                                        marginRight: 40,
+                                        marginLeft: 40,
+                                    }}>
+                                        <Input
+                                            containerStyle={{ width: deviceWidth - 50, height: 60, marginTop: 8 }}
+                                            inputStyle={{ marginLeft: 10, }}
+                                            placeholder='johndoe@gmail.com'
+                                            disabled={false}
+                                            leftIcon={
+                                                <Icon
+                                                    name='user'
+                                                    size={24}
+                                                    color='black'
+                                                />
+                                            }
+                                            onChangeText={(email) => this.setState({ email })}
+                                        />
+
+                                        <Input
+                                            containerStyle={{ width: deviceWidth - 50, height: 60, marginTop: 5, }}
+                                            inputStyle={{ marginLeft: 10 }}
+                                            placeholder='password'
+                                            secureTextEntry={true}
+                                            leftIcon={
+                                                <Icon
+                                                    name='lock'
+                                                    size={24}
+                                                    color='black'
+                                                />
+                                            }
+                                            onChangeText={(password) => this.setState({ password })}
+                                        />
+
+                                        <Button
+                                            onPress={() => {
+                                                // this._storeData();
+                                                // this.props.navigation.navigate('HomeScreen')
+                                                this._tryLogin();
+                                            }}
+                                            disabled={this.state.dialogVisible}
+                                            loading={this.state.dialogVisible}
+                                            disabledStyle={{ backgroundColor: colors.colorGrayText, height: 40, borderRadius: 30 }}
+                                            containerStyle={{ width: deviceWidth - 100, marginTop: 20, alignSelf: "center" }}
+                                            buttonStyle={{ backgroundColor: colors.colorPrimary, borderRadius: 30, height: 40 }}
+                                            titleStyle={{ fontSize: 20 }}
+                                            title="Login"
+                                        />
+                                    </View>
+                                }
                             </View>
-                            {(this.state.login) ? null :
-                                <View style={{
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    marginRight: 40,
-                                    marginLeft: 40,
-                                }}>
-                                    <Input
-                                        containerStyle={{ width: '100%', marginTop: 16, }}
-                                        inputStyle={{ marginLeft: 10, }}
-                                        placeholder='johndoe@gmail.com'
-                                        leftIcon={
-                                            <Icon
-                                                name='user'
-                                                size={24}
-                                                color='black'
-                                            />
-                                        }
-                                        onChangeText={(email) => this.setState({ email })}
-                                    />
-
-                                    <Input
-                                        containerStyle={{ width: '100%', marginTop: 10 }}
-                                        inputStyle={{ marginLeft: 10 }}
-                                        placeholder='password'
-                                        secureTextEntry={true}
-                                        leftIcon={
-                                            <Icon
-                                                name='lock'
-                                                size={24}
-                                                color='black'
-                                            />
-                                        }
-                                        onChangeText={(password) => this.setState({ password })}
-                                    />
-
-                                    <Button
-                                        onPress={() => {
-                                            // this._storeData();
-                                            // this.props.navigation.navigate('HomeScreen')
-                                            this._tryLogin();
-                                        }}
-                                        disabled={this.state.dialogVisible}
-                                        loading={this.state.dialogVisible}
-                                        disabledStyle={{ backgroundColor: colors.colorGrayText, height: 40, borderRadius: 30 }}
-                                        containerStyle={{ width: '90%', marginTop: 20 }}
-                                        buttonStyle={{ backgroundColor: colors.colorPrimary, borderRadius: 30, height: 40, marginBottom: 100 }}
-                                        titleStyle={{ fontSize: 20 }}
-                                        title="Login"
-                                    />
-                                </View>
-                            }
-
                         </Animatable.View>
                         : null}
                 </View>
@@ -214,16 +213,14 @@ export default class Login extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: (Platform.OS === 'ios') ? 30 : 5,
+        flex: 1,
+        marginTop: (Platform.OS === 'ios') ? 30 : 10,
         backgroundColor: colors.colorWhite,
-        height: '100%',
+        alignItems: 'center'
     },
     splashContainer: {
-        paddingTop: 50,
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.colorWhite,
     }
 
 });

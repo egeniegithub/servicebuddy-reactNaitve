@@ -1311,7 +1311,7 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/react-native-vector-icons@^6.4.4":
+"@types/react-native-vector-icons@^6.4.5":
   version "6.4.6"
   resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.6.tgz#848e3b14572def56212cafbf5cb1254b445bfb41"
   integrity sha512-lAyxNfMd5L1xZvXWsGcJmNegDf61TAp40uL6ashNNWj9W3IrDJO59L9+9inh0Y2MsEZpLTdxzVU8Unb4/0FQng==
@@ -2394,7 +2394,7 @@ deep-is@^0.1.3, deep-is@~0.1.3:
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
   integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
 
-deepmerge@^3.1.0, deepmerge@^3.2.0:
+deepmerge@^3.2.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.3.0.tgz#d3c47fd6f3a93d517b14426b0628a17b0125f5f7"
   integrity sha512-GRQOafGHwMHpjPx9iCvTgpu9NojZ49q794EEL94JVEw6VaeA8XTUyBKvAkOOjBX9oJNiV6G3P+T+tihFjo2TqA==
@@ -4506,6 +4506,11 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
+
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
@@ -4516,7 +4521,7 @@ lodash.throttle@^4.1.1:
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
-lodash@^4.17.10, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.4, lodash@^4.3.0:
+lodash@^4.17.10, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.3.0:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
@@ -5662,7 +5667,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.5.10, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -5733,19 +5738,20 @@ react-native-animatable@^1.3.1:
   dependencies:
     prop-types "^15.7.2"
 
-react-native-elements@^1.0.0:
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-1.2.7.tgz#1eca2db715c41722aeb67aea62bd2a4621adb134"
-  integrity sha512-0S+0R1cbItl15i64qrkWnyMztwpw60d0SUsZGVDKRAMf0Jvq9Clgyh/MzxJx2sr42mbedQP1sg5Et4fZM7Fp1w==
+react-native-elements@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-2.3.2.tgz#f6b974127a3484bb46ebd98fbc012fb2208decd7"
+  integrity sha512-HygYYmq8JYjk/YYiUwr/64qT64H2xlPBz0JnkGTQwvnnyXZrfkHFopw8rLWCupv3iLLPDzVohvPs0Z5HLdonSQ==
   dependencies:
-    "@types/react-native-vector-icons" "^6.4.4"
+    "@types/react-native-vector-icons" "^6.4.5"
     color "^3.1.0"
-    deepmerge "^3.1.0"
+    deepmerge "^4.2.2"
     hoist-non-react-statics "^3.1.0"
+    lodash.isequal "^4.5.0"
     opencollective-postinstall "^2.0.0"
     prop-types "^15.7.2"
-    react-native-ratings "^6.3.0"
-    react-native-status-bar-height "^2.2.0"
+    react-native-ratings "^7.2.0"
+    react-native-status-bar-height "^2.5.0"
 
 react-native-gesture-handler@^1.0.15:
   version "1.8.0"
@@ -5762,10 +5768,10 @@ react-native-iphone-x-helper@^1.0.3:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
-react-native-keyboard-aware-scroll-view@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.8.0.tgz#00bcaa38c91323913bb7a733059ad2bc4875f88c"
-  integrity sha512-gPfhgHQI/z7Cc5aeNOEmK0b250QkAeU6V+4oH8EC7mmFneEKn6MAIDjpoiwqt6bV+lFJPABXfx9MtrRmtCeJ/Q==
+react-native-keyboard-aware-scroll-view@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.9.3.tgz#65ab4cab1a987b486d97924602756fa88b7fbfcc"
+  integrity sha512-EDyFp8wAJoKvi1T2pzoPRn8R0Inp3G+575jPAWEFTlXq26URMmk8760rzde2XLW+v/1+QwDyBg6d/5mz63/ZRA==
   dependencies:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
@@ -5786,13 +5792,13 @@ react-native-modal@^10.0.0:
     prop-types "^15.6.2"
     react-native-animatable "^1.3.1"
 
-react-native-ratings@^6.3.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-6.5.0.tgz#a1606ccba3c5b54eec8e6cfa4765a45cf0e4ab8d"
-  integrity sha512-YMcfQ7UQCmXGEc/WPlukHSHs5yvckTwjq5fTRk1FG8gaO7fZCNygEUGPuw4Dbvvp3IlsCUn0bOQd63RYsb7NDQ==
+react-native-ratings@^7.2.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-7.3.0.tgz#32e11e4ed944ba8adbbc995d601df3f131619b6f"
+  integrity sha512-NCDIkmrVPnxPzP9zKdlcNpa2rPs3Hiv2qXsojUr3FpwbANWfgYE+jjGSSCBcS3vpXndTjhoaTGFDnybnUSFPFA==
   dependencies:
-    lodash "^4.17.4"
-    prop-types "^15.5.10"
+    lodash "^4.17.15"
+    prop-types "^15.7.2"
 
 react-native-safe-area-view@^0.14.8:
   version "0.14.9"
@@ -5811,7 +5817,7 @@ react-native-simple-dialogs@^1.1.0:
   resolved "https://registry.yarnpkg.com/react-native-simple-dialogs/-/react-native-simple-dialogs-1.3.0.tgz#d6fd7b86fb24b92d6324acb10e9eeb50b42c0c4f"
   integrity sha512-xe1dAcDXXypwecy5PUicfgPColkV5PRbITGK6TcYmt/s4D4cVmaiPzVkexDXoJHzQN6qLWQt0gXFjmOHmboWzQ==
 
-react-native-status-bar-height@^2.2.0:
+react-native-status-bar-height@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-native-status-bar-height/-/react-native-status-bar-height-2.5.0.tgz#bc0fb85230603850aab9667ee8111a62954de90c"
   integrity sha512-sYBCPYA/NapBSHkdm/IVL4ID3LLlIuLqINi2FBDyMkc2BU9pfSGOtkz9yfxoK39mYJuTrlTOQ7mManARUsYDSA==
