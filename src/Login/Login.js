@@ -94,22 +94,30 @@ export default class Login extends React.Component {
     };
 
     _tryLogin = () => {
-        console.log('1  1 1  1 ');
-        this.setState({ dialogVisible: true });
-        alert('hhere')
-        return
-        doLogin(this.state.email, this.state.password, (result) => {
-            console.log('<< < << < <  : ', result);
-            if (result.status == 'success') {
-                this.setState({ dialogVisible: false });
-                this._setLogin(result);
-                console.log("Here is user ID : " + result.data);
-                console.log(result);
+        const { email, password } = this.state;
+        this.setState({ dialogVisible: true }, () => {
+            if (!email || !password) {
+                this.setState({
+                    dialogVisible: false
+                }, () => {
+                    setTimeout(() => {
+                        alert('Please fill both fileds.')
+                    }, 100);
+                });
             } else {
-                this.setState({ dialogVisible: false });
-                alert(result.message);
-                console.log("error Message.. : " + result.message);
-                console.log(result);
+                doLogin(this.state.email, this.state.password, (result) => {
+                    if (result.status == 'success') {
+                        this.setState({ dialogVisible: false });
+                        this._setLogin(result);
+                        console.log("Here is user ID : " + result.data);
+                        console.log(result);
+                    } else {
+                        this.setState({ dialogVisible: false });
+                        alert(result.message);
+                        console.log("error Message.. : " + result.message);
+                        console.log(result);
+                    }
+                });
             }
         });
     }
@@ -167,6 +175,7 @@ export default class Login extends React.Component {
                                                     color='black'
                                                 />
                                             }
+                                            selectionColor={colors.colorPrimary}
                                             onChangeText={(email) => this.setState({ email })}
                                         />
 
@@ -182,6 +191,7 @@ export default class Login extends React.Component {
                                                     color='black'
                                                 />
                                             }
+                                            selectionColor={colors.colorPrimary}
                                             onChangeText={(password) => this.setState({ password })}
                                         />
 
