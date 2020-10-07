@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.servicebuddy2020"
+        applicationId "com.egenienext.services_app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

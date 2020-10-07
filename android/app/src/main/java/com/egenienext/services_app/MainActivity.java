@@ -1,4 +1,4 @@
-package com.servicebuddy2020;
+package com.egenienext.services_app;
 
 import com.facebook.react.ReactActivity;
 
