@@ -3,7 +3,7 @@ import'react-native';
 import {loggedInUserId} from "../Login/Login";
 
 
-const baseurl = "https://services.intactsolutions.ca/";
+const baseurl = "http://72.255.38.246:8080/index.php/api/";
 const googleMapBaseurl = "https://maps.googleapis.com/maps/api/distancematrix/json?";
 const token = 'eg3nieS1';
 const GOOGLE_MAPS_API_KEY="AIzaSyD3XGW3PgTzix7BVHXCUUR79hf4lVpxdjw";
@@ -17,7 +17,6 @@ const GOOGLE_MAPS_API_KEY="AIzaSyD3XGW3PgTzix7BVHXCUUR79hf4lVpxdjw";
 export async function getActiveJobs(callback) {
     let params = {
         user_id: loggedInUserId,
-        token: token,
     };
     let request = {
         method: 'POST',
@@ -35,7 +34,6 @@ export async function doLogin(email, password, callback) {
     let params = {
         email: email,
         password: password,
-        token: token,
     };
 
     let request = {

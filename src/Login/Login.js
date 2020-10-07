@@ -41,8 +41,8 @@ export default class Login extends React.Component {
         header: null,
     };
 
-    componentDidMount() {
-        this._retrieveData();
+   async componentDidMount() {
+       await this._retrieveData();
         setTimeout(() => {
 
             this.setState({
@@ -123,7 +123,6 @@ export default class Login extends React.Component {
     }
 
     _setLogin = (result) => {
-        console.log("Set Login is Called...");
         this._storeData(result);
         setTimeout(() => {
             const resetAction = StackActions.reset({
