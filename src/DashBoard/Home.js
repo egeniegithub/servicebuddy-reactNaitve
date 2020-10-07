@@ -177,7 +177,7 @@ export default class Home extends React.Component {
                     containerStyle={[{
                         backgroundColor: colors.colorPrimary,
 
-                    }, (Platform.OS === 'ios') ? null : { height: 50, paddingBottom: 20 }]}
+                    }, (Platform.OS === 'ios') ? null : { height: 60 }]}
 
                 />
                 <View style={{

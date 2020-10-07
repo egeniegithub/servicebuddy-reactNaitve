@@ -223,7 +223,7 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: (Platform.OS === 'ios') ? 30 : 10,
+        marginTop: (Platform.OS === 'ios') ? 40 : 15,
         backgroundColor: colors.colorWhite,
         alignItems: 'center'
     },
