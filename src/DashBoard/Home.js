@@ -39,6 +39,7 @@ export default class Home extends React.Component {
     _getISBreak = async () => {
         try {
             const value = await AsyncStorage.getItem('isBreak');
+            const token = await AsyncStorage.getItem('token');
             if (value !== null) {
                 if (value == "true") {
                     const resetAction = StackActions.reset({
@@ -80,6 +81,7 @@ export default class Home extends React.Component {
         try {
             console.log("Login Value Set.");
             await AsyncStorage.setItem('isLogin', 'false');
+            await AsyncStorage.setItem('token', 'null');
         } catch (error) {
             console.log("Error While Saveing Data");
         }

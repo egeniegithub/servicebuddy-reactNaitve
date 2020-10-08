@@ -1,9 +1,9 @@
 import React from 'react';
-import'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {loggedInUserId} from "../Login/Login";
 
 
-const baseurl = "http://72.255.38.246:8080/index.php/api/";
+const baseurl = "http://72.255.38.246:8080/api/";
 const googleMapBaseurl = "https://maps.googleapis.com/maps/api/distancematrix/json?";
 const token = 'eg3nieS1';
 const GOOGLE_MAPS_API_KEY="AIzaSyD3XGW3PgTzix7BVHXCUUR79hf4lVpxdjw";
@@ -18,11 +18,13 @@ export async function getActiveJobs(callback) {
     let params = {
         user_id: loggedInUserId,
     };
+    let userToken = await AsyncStorage.getItem('token');
     let request = {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + userToken
         },
         body: JSON.stringify(params),
     };
@@ -108,6 +110,7 @@ function processNetworkRequest(url, request, callback, TIME_OUT ) {
         .then(processResponse)
         .then(function (response) {
             // Clear TimeOut As CleanUp
+            console.log('1  1 11  1 1 1 1 1 1 : ', response);
             clearTimeout(timeout);
             if(!didTimeOut) {
                 resolve(response);

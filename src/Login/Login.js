@@ -68,6 +68,7 @@ export default class Login extends React.Component {
             loggedInUserId = result.data.user_id.toString();
             await AsyncStorage.setItem('isLogin', 'true');
             await AsyncStorage.setItem('user_id', result.data.user_id.toString());
+            await AsyncStorage.setItem('token', result.token.toString());
         } catch (error) {
             console.log("Error While Saveing Data");
         }
@@ -75,8 +76,6 @@ export default class Login extends React.Component {
 
     _retrieveData = async () => {
         try {
-            console.log("Receive Data from Storage");
-
             const value = await AsyncStorage.getItem('isLogin');
             if (value !== null) {
                 console.log(value);
