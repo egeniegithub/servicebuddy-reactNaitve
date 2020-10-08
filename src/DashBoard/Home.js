@@ -8,6 +8,7 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import { Header, Icon, ListItem, Divider, Image, Avatar } from 'react-native-elements';
 import { getActiveJobs } from '../network/Network';
 import { setJobList, getJobList, getIsBreakTime } from "../store/Store";
+import CustomHeader from '../components/CustomHeader';
 
 let colors = require('../Themes/Color');
 let moment = require('moment');
@@ -170,17 +171,9 @@ export default class Home extends React.Component {
 
         return (
             <View style={{ flex: 1, }}>
-                <StatusBar backgroundColor={colors.colorPrimary} barStyle="light-content" />
-                <Header
-                    barStyle="light-content"
-                    // rightComponent={{ icon: 'more-vert', color: '#fff' }}
-                    centerComponent={{ text: 'Job Listings', style: { color: '#fff', fontSize: 20, fontWeight: '500' } }}
+                <CustomHeader
+                    title="Job Listings"
                     rightComponent={this.menuComponent()}
-                    containerStyle={[{
-                        backgroundColor: colors.colorPrimary,
-
-                    }, (Platform.OS === 'ios') ? null : { height: 60 }]}
-
                 />
                 <View style={{
                     backgroundColor: colors.colorPrimaryLight,

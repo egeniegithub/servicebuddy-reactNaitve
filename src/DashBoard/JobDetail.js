@@ -13,6 +13,7 @@ import { getEstimatedTime, updateStatus } from '../network/Network';
 import { jobList } from "./Home";
 import { loggedInUserId } from "../Login/Login";
 import { NavigationActions, StackActions } from "react-navigation";
+import CustomHeader from '../components/CustomHeader';
 
 let moment = require('moment');
 
@@ -216,14 +217,9 @@ export default class JobDetail extends React.Component {
         }
         return (
             <View style={{ flex: 1, }}>
-                <StatusBar backgroundColor={colors.colorPrimary} barStyle="light-content" />
-                <Header
-                    barStyle="light-content"
+                <CustomHeader
+                    title="Job Detail"
                     leftComponent={this.leftComponentGoBack()}
-                    centerComponent={{ text: 'Job Detail', style: { color: '#fff', fontSize: 20, fontWeight: '500' } }}
-                    containerStyle={[{
-                        backgroundColor: colors.colorPrimary,
-                    }, (Platform.OS === 'ios') ? null : { height: 50, paddingBottom: 20 }]}
                 />
                 {
                     (this.state.jobDetail !== null) ?
