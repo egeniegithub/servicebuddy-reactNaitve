@@ -14,6 +14,7 @@ import { jobList } from "./Home";
 import { loggedInUserId } from "../Login/Login";
 import { NavigationActions, StackActions } from "react-navigation";
 import CustomHeader from '../components/CustomHeader';
+import Geolocation from '@react-native-community/geolocation';
 
 let moment = require('moment');
 
@@ -145,7 +146,7 @@ export default class JobDetail extends React.Component {
             this.attemptStatusChange(this.state.jobDetail, "Done", "0", isAlreadyUpdated);
         } else if (this.state.jobDetail.isFirst) {
             console.log("here")
-            navigator.geolocation.getCurrentPosition(
+            Geolocation.getCurrentPosition(
                 (position) => {
                     let dest = this.state.jobDetail.customer_location.split(',');
                     getEstimatedTime(position.coords.latitude, position.coords.longitude, dest[0], dest[1], (response) => {
@@ -173,7 +174,7 @@ export default class JobDetail extends React.Component {
         }
     };
     showMap = () => {
-        navigator.geolocation.getCurrentPosition(
+        Geolocation.getCurrentPosition(
             (position) => {
                 let dest = this.state.jobDetail.customer_location.split(',');
                 showLocation({
