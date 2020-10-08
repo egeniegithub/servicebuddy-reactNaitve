@@ -98,6 +98,26 @@ export async function getEstimatedTime(currentLat,currentLong,destLat,destLong,c
     };
     processNetworkRequest(url, request, callback, 30000);
 }
+
+export async function reLogin(callback) {
+    let userObject = await AsyncStorage.getItem('userObject');
+    userObject = JSON.parse(userObject)
+    let params = {
+        email: userObject.email,
+        password: userObject.password,
+    };
+    let request = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+         //body: formData,
+        body: JSON.stringify(params),
+    };
+    processNetworkRequest(ApiNames.login, request, callback, 30000);
+}
+
 function processNetworkRequest(url, request, callback, TIME_OUT ) {
     let didTimeOut = false;
     new Promise( function (resolve, reject) {
@@ -109,8 +129,18 @@ function processNetworkRequest(url, request, callback, TIME_OUT ) {
         fetch(url, request)
         .then(processResponse)
         .then(function (response) {
+            
+            if (response.status === 200 && response.data.status === 'failure') {
+                let oldUrl = url;
+                let oldRequest = request;
+                let oldCallback = callback;
+                reLogin(async result => {
+                    await AsyncStorage.setItem('token', result.token.toString());
+                    oldRequest.headers.Authorization = 'Bearer ' + result.token.toString();
+                    processNetworkRequest(oldUrl, oldRequest, oldCallback, 30000);
+                })
+            }
             // Clear TimeOut As CleanUp
-            console.log('1  1 11  1 1 1 1 1 1 : ', response);
             clearTimeout(timeout);
             if(!didTimeOut) {
                 resolve(response);

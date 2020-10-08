@@ -63,12 +63,19 @@ export default class Login extends React.Component {
     }
 
     _storeData = async (result) => {
+        const {email, password} = this.state;
+        let userObject = {
+            email: email,
+            password: password,
+            token: result.token,
+            user_id: result.data.user_id
+        };
         try {
-            console.log("Login Value Set.");
             loggedInUserId = result.data.user_id.toString();
             await AsyncStorage.setItem('isLogin', 'true');
             await AsyncStorage.setItem('user_id', result.data.user_id.toString());
             await AsyncStorage.setItem('token', result.token.toString());
+            await AsyncStorage.setItem('userObject', JSON.stringify(userObject));
         } catch (error) {
             console.log("Error While Saveing Data");
         }
