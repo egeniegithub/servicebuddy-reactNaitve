@@ -67,8 +67,6 @@ export default class Login extends React.Component {
         let userObject = {
             email: email,
             password: password,
-            token: result.token,
-            user_id: result.data.user_id
         };
         try {
             loggedInUserId = result.data.user_id.toString();
