@@ -38,7 +38,7 @@ export default class Login extends React.Component {
     }
 
     static navigationOptions = {
-        header: null,
+        headerShown: false,
     };
 
    async componentDidMount() {
