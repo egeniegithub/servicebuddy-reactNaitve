@@ -280,7 +280,7 @@ export default class JobDetail extends React.Component {
                                 </View>
                                 <Divider style={{ backgroundColor: colors.colorGrayText, }} />
 
-                                <View style={{ flexDirection: 'row', marginTop: 20, marginBottom: 20, marginRight: 130 }}>
+                                <View style={{ flexDirection: 'row', marginVertical: 10, marginRight: 130 }}>
                                     <View style={{ flexDirection: 'row', }}>
                                         <View style={{ marginLeft: 10, }}>
                                             <Image
@@ -296,6 +296,25 @@ export default class JobDetail extends React.Component {
                                                 textAlign: 'justify',
                                             }}>{this.state.jobDetail.services}</Text>
                                             {/* <Text style={{ fontWeight: '700', textAlign: 'justify', }}>kkkkkkkkkk kkk</Text> */}
+                                        </View>
+                                    </View>
+                                </View>
+
+                                <Divider style={{ backgroundColor: colors.colorGrayText, }} />
+                                <View style={{ flexDirection: 'row', marginVertical: 10, marginRight: 130 }}>
+                                    <View style={{ flexDirection: 'row', }}>
+                                        <View style={{ marginLeft: 10, }}>
+                                            <Image
+                                                style={{ width: 35, height: 35 }}
+                                                source={require('../../assets/ic_comment.png')}
+                                            />
+                                        </View>
+                                        <View style={{ marginLeft: 10, }}>
+                                            <Text style={{ paddingBottom: 10, color: colors.colorGrayText }}>Additional Comments</Text>
+                                            <Text style={{
+                                                fontWeight: '700',
+                                                textAlign: 'justify',
+                                            }}>{this.state.jobDetail.additional_comments}</Text>
                                         </View>
                                     </View>
                                 </View>
