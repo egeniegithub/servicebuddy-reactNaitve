@@ -21,7 +21,7 @@ let moment = require('moment');
 export default class JobDetail extends React.Component {
     intervalID = 0;
     static navigationOptions = {
-        header: null,
+        headerShown: false,
     };
 
     constructor(props) {
@@ -36,6 +36,7 @@ export default class JobDetail extends React.Component {
     componentDidMount() {
         let { navigation } = this.props;
         let data = navigation.getParam('data', null);
+        console.log(' 1 1 1 1 1 11  1 : ', data);
         this.setState({
             jobDetail: data,
         });

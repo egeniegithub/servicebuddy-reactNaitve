@@ -28,7 +28,7 @@ export default class Home extends React.Component {
     }
 
     static navigationOptions = {
-        header: null,
+        headerShown: false,
     };
 
     componentDidMount() {

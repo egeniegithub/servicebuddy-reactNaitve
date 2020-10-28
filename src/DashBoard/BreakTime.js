@@ -17,7 +17,7 @@ export default class BreakTime extends React.Component {
         }
     }
     static navigationOptions = {
-        header: null,
+        headerShown: false
     };
 
     componentDidMount() {

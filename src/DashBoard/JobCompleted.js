@@ -33,7 +33,7 @@ export default class JobCompleted extends React.Component {
     }
 
     static navigationOptions = {
-        header: null,
+        headerShown: false,
     };
 
     _setBreakTime = async () => {
