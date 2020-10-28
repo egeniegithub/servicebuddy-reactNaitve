@@ -183,17 +183,17 @@ function processError(response, callback) {
             callback(response.data);
         }
         else if (response.status >= 500) {
-            let responseJson = { success: false, message: "Network Error! Request Failed" }
+            let responseJson = { success: false, message: "Network Connection Failed!" }
             callback(responseJson);
         }
     }
     else {
         let responseJson;
         if (response.didTimeOut) {
-            responseJson = { success: false, message: "Request Network Timeout" };
+            responseJson = { success: false, message: "Poor Internet Connection." };
         }
         else {
-            responseJson = { success: false, message: "Network Error. Request Failed!" }
+            responseJson = { success: false, message: "No Internet Connection." } // Network Connection Failed!
         }
         callback(responseJson);
     }
