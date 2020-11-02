@@ -213,7 +213,7 @@ export default class Home extends React.Component {
 
     _displayJobsList = () => {
         return (
-            <View>
+            <View style={{ flex: 1, }}>
                 {
                     this.state.jobsObj.data.map((data, i) => {
                         let jobidicon = require('../../assets/ic_jobid_black.png');
@@ -245,9 +245,11 @@ export default class Home extends React.Component {
                         return (
                             <ListItem
                                 key={i}
-                                containerStyle={{ backgroundColor: backgroundColor }}
-                                title={
-                                    <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
+                                bottomDivider
+                                onPress={() => this.props.navigation.navigate('JobDetail', { data: data })}
+                                containerStyle={{ backgroundColor: backgroundColor, alignItems: 'center' }}>
+                                <ListItem.Content>
+                                    <View style={{ flexDirection: "row", width: '100%', justifyContent: "space-between" }}>
                                         <View style={styles.rowStyle}>
                                             <Text
                                                 style={{ fontSize: 20, color: textColor }}>{data.customer_name}</Text>
@@ -267,62 +269,55 @@ export default class Home extends React.Component {
                                             </View>
                                         </View> : null}
                                     </View>
-                                }
-                                onPress={() => this.props.navigation.navigate('JobDetail', { data: data })}
-                                subtitle={
-                                    <View style={{ marginTop: 5 }}>
-                                        <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
-                                            <View style={styles.rowStyle}>
-                                                <Image
-                                                    source={jobidicon}
-                                                    style={{ width: 23, height: 23 }}
-                                                />
-                                                <Text
-                                                    style={{ marginLeft: 15, color: textColor }}>{data.job_id}</Text>
+                                    <View>
+                                        <View style={{ marginTop: 5, width: '100%' }}>
+                                            <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
+                                                <View style={styles.rowStyle}>
+                                                    <Image
+                                                        source={jobidicon}
+                                                        style={{ width: 23, height: 23 }}
+                                                    />
+                                                    <Text
+                                                        style={{ marginLeft: 15, color: textColor }}>{data.job_id}</Text>
+                                                </View>
                                             </View>
-                                        </View>
-                                        <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
-                                            <View style={styles.rowStyle}>
-                                                <Image
-                                                    source={phoneIcon}
-                                                    style={{ width: 23, height: 23 }}
-                                                />
-                                                <Text
-                                                    style={{
-                                                        marginLeft: 15,
-                                                        color: textColor
-                                                    }}>{data.customer_phone}</Text>
+                                            <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
+                                                <View style={styles.rowStyle}>
+                                                    <Image
+                                                        source={phoneIcon}
+                                                        style={{ width: 23, height: 23 }}
+                                                    />
+                                                    <Text
+                                                        style={{
+                                                            marginLeft: 15,
+                                                            color: textColor
+                                                        }}>{data.customer_phone}</Text>
+                                                </View>
                                             </View>
-                                        </View>
 
-                                        <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
-                                            <View style={styles.rowStyle}>
-                                                <Image
-                                                    source={timeIcon}
-                                                    style={{ width: 23, height: 23 }}
-                                                />
-                                                <Text
-                                                    style={{
-                                                        marginLeft: 15,
-                                                        color: textColor
-                                                    }}>{moment(data.starting_time, 'HH:mm').format('hh:mm A')}</Text>
-                                            </View>
-                                            <View>
-                                                <Image
-                                                    source={chevron}
-                                                    style={{ width: 23, height: 23 }}
-                                                />
+                                            <View style={{ justifyContent: 'space-between', flexDirection: 'row', width: '100%' }}>
+                                                <View style={styles.rowStyle}>
+                                                    <Image
+                                                        source={timeIcon}
+                                                        style={{ width: 23, height: 23 }}
+                                                    />
+                                                    <Text
+                                                        style={{
+                                                            marginLeft: 15,
+                                                            color: textColor
+                                                        }}>{moment(data.starting_time, 'HH:mm').format('hh:mm A')}</Text>
+                                                </View>
+                                                <View>
+                                                    <Image
+                                                        source={chevron}
+                                                        style={{ width: 23, height: 23 }}
+                                                    />
+                                                </View>
                                             </View>
                                         </View>
-                                        <Divider style={{
-                                            backgroundColor: colors.colorGrayText,
-                                            marginLeft: -10,
-                                            marginRight: -10,
-                                            marginTop: 10
-                                        }} />
                                     </View>
-                                }
-                            />
+                                </ListItem.Content>
+                            </ListItem>
                         )
                     })
                 }
