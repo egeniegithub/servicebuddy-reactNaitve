@@ -19,7 +19,6 @@ import { doLogin } from '../network/Network';
 import { ProgressDialog } from 'react-native-simple-dialogs';
 import { StackActions, NavigationActions } from "react-navigation";
 // MyCustomComponent = Animatable.createAnimatableComponent(MyCustomComponent);
-export var loggedInUserId = '0';
 
 const deviceWidth = Dimensions.get('window').width;
 export default class Login extends React.Component {
@@ -41,8 +40,8 @@ export default class Login extends React.Component {
         headerShown: false,
     };
 
-   async componentDidMount() {
-       await this._retrieveData();
+    async componentDidMount() {
+        await this._retrieveData();
         setTimeout(() => {
 
             this.setState({
@@ -63,13 +62,12 @@ export default class Login extends React.Component {
     }
 
     _storeData = async (result) => {
-        const {email, password} = this.state;
+        const { email, password } = this.state;
         let userObject = {
             email: email,
             password: password,
         };
         try {
-            loggedInUserId = result.data.user_id.toString();
             await AsyncStorage.setItem('isLogin', 'true');
             await AsyncStorage.setItem('user_id', result.data.user_id.toString());
             await AsyncStorage.setItem('token', result.token.toString());
@@ -83,10 +81,8 @@ export default class Login extends React.Component {
         try {
             const value = await AsyncStorage.getItem('isLogin');
             if (value !== null) {
-                console.log(value);
                 // this.props.navigation.navigate('HomeScreen');
                 if (value == 'true') {
-                    loggedInUserId = await AsyncStorage.getItem('user_id');
                     this.setState({
                         login: true,
                     });
@@ -113,8 +109,6 @@ export default class Login extends React.Component {
                     if (result.status == 'success') {
                         this.setState({ dialogVisible: false });
                         this._setLogin(result);
-                        console.log("Here is user ID : " + result.data);
-                        console.log(result);
                     } else {
                         this.setState({ dialogVisible: false });
                         alert(result.message);

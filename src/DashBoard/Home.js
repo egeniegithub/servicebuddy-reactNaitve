@@ -24,7 +24,6 @@ export default class Home extends React.Component {
             jobsObj: null,
             initialRefreshing: true,
         };
-        console.log("Home Constructor..");
     }
 
     static navigationOptions = {

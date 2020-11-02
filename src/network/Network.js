@@ -1,6 +1,5 @@
 import React from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { loggedInUserId } from "../Login/Login";
 
 
 const baseurl = "http://72.255.38.246:8080/api/";
@@ -15,8 +14,9 @@ class ApiNames {
 }
 
 export async function getActiveJobs(callback) {
+    let userId = await AsyncStorage.getItem('user_id');
     let params = {
-        user_id: loggedInUserId,
+        user_id: userId,
     };
     let userToken = await AsyncStorage.getItem('token');
     let request = {
@@ -70,9 +70,10 @@ export async function updateStatus(job_id, status, estimatedTime, callback) {
     processNetworkRequest(ApiNames.updateStatus, request, callback, 30000);
 }
 export async function startBreak(duration, callback) {
+    let userId = await AsyncStorage.getItem('user_id');
     let params = {
         time: duration,
-        user_id: loggedInUserId,
+        user_id: userId,
     };
     let userToken = await AsyncStorage.getItem('token');
     let request = {
@@ -157,7 +158,6 @@ function processNetworkRequest(url, request, callback, TIME_OUT) {
     })
         .then(function (response) {
             // Request success and no Timeout
-            console.log("Request success and no Timeout" + response);
             callback(response.data);
         })
         .catch(function (err) {

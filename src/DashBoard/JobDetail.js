@@ -37,7 +37,6 @@ export default class JobDetail extends React.Component {
     componentDidMount() {
         let { navigation } = this.props;
         let data = navigation.getParam('data', null);
-        console.log(' 1 1 1 1 1 11  1 : ', data);
         this.setState({
             jobDetail: data,
         });
@@ -83,7 +82,6 @@ export default class JobDetail extends React.Component {
         if (isAlreadyUpdated && EstimatedTime > 15) {
             this.startTracking(EstimatedTime, moment());
         } else {
-            console.log("EstimatedTime ; " + EstimatedTime);
             EstimatedTime = Math.ceil(EstimatedTime);
             updateStatus(jobDetail.id.toString(), updatedStatus, EstimatedTime.toString(), (response2) => {
                 if (response2 != null && response2.status === "success") {
@@ -120,22 +118,7 @@ export default class JobDetail extends React.Component {
     }
 
     _attemptStatusChange = (isAlreadyUpdated = false) => {
-        // {
-        // just for testing
 
-        // console.log(jobList.jobCount);
-        // console.log("------");
-        // console.log(loggedInUserId);
-        // jobList.jobCount = jobList.jobCount - 1;
-        // if (jobList.jobCount > 0) {
-        //     this.props.navigation.navigate('JobCompleted');
-        // }
-        // else {
-        //     this.props.navigation.navigate('DayCompleted');
-        // }
-        // return;
-
-        //}
         this.setState({
             statusChangeRequest: true
         });
@@ -147,12 +130,10 @@ export default class JobDetail extends React.Component {
             clearInterval(this.intervalID);
             this.attemptStatusChange(this.state.jobDetail, "Done", "0", isAlreadyUpdated);
         } else if (this.state.jobDetail.isFirst) {
-            console.log("here")
             Geolocation.getCurrentPosition(
                 (position) => {
                     let dest = this.state.jobDetail.customer_location.split(',');
                     getEstimatedTime(position.coords.latitude, position.coords.longitude, dest[0], dest[1], (response) => {
-                        console.log(response);
                         if (response.status === "OK" && response.rows[0].elements[0].duration != null) {
                             let timeObj = response.rows[0].elements[0].duration.value;
                             let EstimatedTime = timeObj / 60;
@@ -195,8 +176,6 @@ export default class JobDetail extends React.Component {
             },
             { enableHighAccuracy: false, timeout: 200000, maximumAge: 10000 },
         );
-        console.log("Here is MAp..");
-
     };
 
     render() {
