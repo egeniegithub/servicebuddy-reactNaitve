@@ -141,7 +141,7 @@ export default class Login extends React.Component {
                         <Animatable.View animation="fadeInUpBig" duration={800} >
                             <View style={styles.splashContainer}>
                                 <Image source={require('../../assets/logo.png')}
-                                    style={{ width: 150, height: 150 }} />
+                                    style={{ width: 150, height: 150, marginTop: 8 }} />
                                 <Text style={{
                                     color: colors.colorPrimary,
                                     fontWeight: '600',
