@@ -92,7 +92,7 @@ export default class Home extends React.Component {
         if (Platform.OS === 'ios') {
             ActionSheetIOS.showActionSheetWithOptions(
                 {
-                    options: ['Cancel', 'Log Out'],
+                    options: ['Cancel', 'LogOut'],
                     destructiveButtonIndex: 1,
                     cancelButtonIndex: 0,
                 },
@@ -104,8 +104,8 @@ export default class Home extends React.Component {
             );
         } else {
             Alert.alert(
-                'Log Out',
-                '',
+                'LogOut',
+                'Are you sure you want to logout?',
                 [
                     {
                         text: 'Cancel',
@@ -115,7 +115,7 @@ export default class Home extends React.Component {
                         style: 'cancel',
                     },
                     {
-                        text: 'Log Out', onPress: () => {
+                        text: 'LogOut', onPress: () => {
                             this._signOut()
                         }
                     },

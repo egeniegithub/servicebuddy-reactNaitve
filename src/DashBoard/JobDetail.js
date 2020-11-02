@@ -1,8 +1,9 @@
 import React from 'react';
 import {
     StyleSheet, View, Text, StatusBar, Platform, TouchableOpacity,
-    ScrollView, Linking, Clipboard
+    ScrollView, Linking
 } from 'react-native';
+import Clipboard from '@react-native-community/clipboard';
 import { Header, Icon, Divider, Button, Image, } from 'react-native-elements';
 
 let colors = require("../Themes/Color");
