@@ -98,12 +98,18 @@ export default class JobDetail extends React.Component {
                             jobDetail: jobDetail,
                         });
                         if (updatedStatus === "Done") {
-                            jobList.jobCount = jobList.jobCount - 1;
-                            if (jobList.jobCount > 0) {
-                                this.props.navigation.navigate('JobCompleted');
-                            } else {
-                                this.props.navigation.navigate('DayCompleted');
-                            }
+                            const resetAction = StackActions.reset({
+                                index: 0,
+                                actions: [NavigationActions.navigate({ routeName: 'GetPayment' })],
+                              });
+                              this.props.navigation.dispatch(resetAction);
+
+                            // jobList.jobCount = jobList.jobCount - 1;
+                            // if (jobList.jobCount > 0) {
+                            //     this.props.navigation.navigate('JobCompleted');
+                            // } else {
+                            //     this.props.navigation.navigate('DayCompleted');
+                            // }
                         }
                     }
                 } else {
@@ -276,7 +282,6 @@ export default class JobDetail extends React.Component {
                                                 fontWeight: '700',
                                                 textAlign: 'justify',
                                             }}>{this.state.jobDetail.services}</Text>
-                                            {/* <Text style={{ fontWeight: '700', textAlign: 'justify', }}>kkkkkkkkkk kkk</Text> */}
                                         </View>
                                     </View>
                                 </View>

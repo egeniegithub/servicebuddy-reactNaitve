@@ -7,6 +7,7 @@ import JobDetail from './DashBoard/JobDetail';
 import JobCompleted from './DashBoard/JobCompleted';
 import DayCompleted from './DashBoard/DayCompleted';
 import BreakTime from './DashBoard/BreakTime';
+import GetPayment from './DashBoard/GetPayment';
 import { createStackNavigator } from 'react-navigation-stack';
 
 const AppNavigator = createStackNavigator({
@@ -26,10 +27,14 @@ const AppNavigator = createStackNavigator({
     },
     BreakTime: {
         screen: BreakTime
-    }
+    },
+    GetPayment: {
+        screen: GetPayment
+    },
 },
     {
-        initialRouteName: "LoginScreen"
+        initialRouteName: "GetPayment",
+        headerMode: 'none'
     });
 
 export default createAppContainer(AppNavigator);
