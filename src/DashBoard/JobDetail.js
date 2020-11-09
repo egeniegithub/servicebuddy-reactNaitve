@@ -101,8 +101,8 @@ export default class JobDetail extends React.Component {
                             const resetAction = StackActions.reset({
                                 index: 0,
                                 actions: [NavigationActions.navigate({ routeName: 'GetPayment' })],
-                              });
-                              this.props.navigation.dispatch(resetAction);
+                            });
+                            this.props.navigation.dispatch(resetAction);
 
                             // jobList.jobCount = jobList.jobCount - 1;
                             // if (jobList.jobCount > 0) {
@@ -275,13 +275,35 @@ export default class JobDetail extends React.Component {
                                                 source={require('../../assets/ic_services.png')}
                                             />
                                         </View>
-                                        <View style={{ marginLeft: 10, }}>
+                                        <View style={{ marginLeft: 10, width: '100%' }}>
                                             <Text style={{ paddingBottom: 10, color: colors.colorGrayText }}>Requested
                                                 Services</Text>
-                                            <Text style={{
-                                                fontWeight: '700',
-                                                textAlign: 'justify',
-                                            }}>{this.state.jobDetail.services}</Text>
+                                            {this.state.jobDetail.services.map(data => {
+                                                let tax = JSON.parse(data.tax);
+                                                let gst = tax.GST;
+                                                return (
+                                                    <View style={{ borderColor: 'gray', borderWidth: 0.5, borderRadius: 2 }}>
+                                                        <Text style={styles.servicesName}>{data.name}</Text>
+                                                        <View style={{ height: 0.5, backgroundColor: 'gray' }} />
+                                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+                                                            <View style={{ flexDirection: 'row' }}>
+                                                                <Text style={styles.servicesRowAmountTextHeading}>Cost : </Text>
+                                                                <Text style={styles.servicesRowAmountText}>{data.cost}</Text>
+                                                            </View>
+                                                            <View style={styles.servicesRowDivider} />
+                                                            <View style={{ flexDirection: 'row' }}>
+                                                                <Text style={styles.servicesRowAmountTextHeading}>GST : </Text>
+                                                                <Text style={styles.servicesRowAmountText}>{gst}</Text>
+                                                            </View>
+                                                            <View style={styles.servicesRowDivider} />
+                                                            <View style={{ flexDirection: 'row' }}>
+                                                                <Text style={styles.servicesRowAmountTextHeading}>Total : </Text>
+                                                                <Text style={[styles.servicesRowAmountText, { paddingRight: 10 }]}>{data.total}</Text>
+                                                            </View>
+                                                        </View>
+                                                    </View>
+                                                )
+                                            })}
                                         </View>
                                     </View>
                                 </View>
@@ -334,4 +356,24 @@ export default class JobDetail extends React.Component {
         );
     }
 }
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    servicesRowAmountTextHeading: {
+        paddingLeft: 6,
+        paddingVertical: 8,
+        fontWeight: '700'
+    },
+    servicesRowAmountText: {
+
+        paddingVertical: 8
+    },
+    servicesRowDivider: {
+        width: 0.5, height: '100%', backgroundColor: 'gray'
+    },
+    servicesName: {
+        fontWeight: '700',
+        textAlign: 'justify',
+        paddingHorizontal: 6,
+        paddingVertical: 8
+    }
+
+})
