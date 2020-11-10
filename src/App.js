@@ -33,7 +33,7 @@ const AppNavigator = createStackNavigator({
     },
 },
     {
-        initialRouteName: "GetPayment",
+        initialRouteName: "LoginScreen",
         headerMode: 'none'
     });
 

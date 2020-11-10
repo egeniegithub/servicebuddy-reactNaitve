@@ -11,8 +11,6 @@ import JobDetailFirst from '../components/JobDetailFirst';
 import SingleRowJobDetail from '../components/SingleRowJobDetail';
 import { showLocation, Popup } from 'react-native-map-link'
 import { getEstimatedTime, updateStatus } from '../network/Network';
-import { jobList } from "./Home";
-import { loggedInUserId } from "../Login/Login";
 import { NavigationActions, StackActions } from "react-navigation";
 import CustomHeader from '../components/CustomHeader';
 import Geolocation from '@react-native-community/geolocation';
@@ -100,16 +98,14 @@ export default class JobDetail extends React.Component {
                         if (updatedStatus === "Done") {
                             const resetAction = StackActions.reset({
                                 index: 0,
-                                actions: [NavigationActions.navigate({ routeName: 'GetPayment' })],
+                                actions: [NavigationActions.navigate({
+                                    routeName: 'GetPayment',
+                                    params: {
+                                        data: jobDetail
+                                    }
+                                })],
                             });
                             this.props.navigation.dispatch(resetAction);
-
-                            // jobList.jobCount = jobList.jobCount - 1;
-                            // if (jobList.jobCount > 0) {
-                            //     this.props.navigation.navigate('JobCompleted');
-                            // } else {
-                            //     this.props.navigation.navigate('DayCompleted');
-                            // }
                         }
                     }
                 } else {
@@ -278,11 +274,11 @@ export default class JobDetail extends React.Component {
                                         <View style={{ marginLeft: 10, width: '100%' }}>
                                             <Text style={{ paddingBottom: 10, color: colors.colorGrayText }}>Requested
                                                 Services</Text>
-                                            {this.state.jobDetail.services.map(data => {
+                                            {this.state.jobDetail.services.map((data, index) => {
                                                 let tax = JSON.parse(data.tax);
                                                 let gst = tax.GST;
                                                 return (
-                                                    <View style={{ borderColor: 'gray', borderWidth: 0.5, borderRadius: 2 }}>
+                                                    <View style={{ borderColor: 'gray', borderWidth: 0.5, borderRadius: 2 }} key={index}>
                                                         <Text style={styles.servicesName}>{data.name}</Text>
                                                         <View style={{ height: 0.5, backgroundColor: 'gray' }} />
                                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 import { Divider } from 'react-native-elements';
 import CustomHeader from '../components/CustomHeader';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import * as colors from '../Themes/Color';
 import { Input, Button } from 'react-native-elements';
-import { getJobInvoice } from '../network/Network';
 import { Dialog } from 'react-native-simple-dialogs';
-import { WebView } from 'react-native-webview';
+import PDFView from 'react-native-view-pdf';
+import { jobList } from "./Home";
+import { NavigationActions, StackActions } from "react-navigation";
 
-function GetPayment() {
+function GetPayment(props) {
     const [radioValue, setRadioValue] = useState(0);
     const [radioText, setRadioText] = useState('');
     const [amount, setAmount] = useState('');
@@ -19,6 +20,8 @@ function GetPayment() {
         { label: 'Credit Card', value: 1 },
         { label: 'Others', value: 2 }
     ];
+    let { navigation } = props;
+    let data = navigation.getParam('data', null);
 
     useEffect(function () {
         setRadioButtonText()
@@ -40,28 +43,29 @@ function GetPayment() {
         }
     }
 
-    function getInvoiceFromServer() {
-        getJobInvoice('21', result => {
-            console.log('1 1  1 1 1 1 Result Here . : ', result);
-        })
-    }
+    let pdfURL = `http://72.255.38.246:8080/api/get_job_invoice/${data?.invoice_id}`;
     return (
         <View style={{ flex: 1 }}>
             <CustomHeader
                 title="Get Payment"
             />
-            {/* <Dialog
+            <Dialog
                 visible={showInvoice}
                 onTouchOutside={() => setShowInvoice(false)} >
-                <View style={{ height: '80%' }}>
-                    <WebView source={{ uri: 'http://72.255.38.246:8080/api/get_job_invoice/eyJpdiI6IlVDVmRUVnRQRE5OMmVsdk4veHhQb3c9PSIsInZhbHVlIjoiWGhNNmJoUHVMcVlaYk8zcVdOVFlEZz09IiwibWFjIjoiZTUxNTQ0MGE1YTFhMDMwODg1ZWI2YmMyMzZhOTMwODhiNGI0ZmViM2U5M2VjNTdjNTg5MWE2YTJiOTNlNjFlNSJ9' }}
-                        style={{ width: '100%', height: '100%' }} />
+                <View style={{ height: '85%' }}>
+                    <PDFView
+                        fadeInDuration={250.0}
+                        style={{ width: '100%', height: '100%' }}
+                        resource={pdfURL}
+                        onLoad={(res) => console.log(`PDF rendered from ${res}`)}
+                        onError={(error) => console.log('Cannot render PDF', error)}
+                    />
                 </View>
-            </Dialog> */}
+            </Dialog>
             <View style={styles.paymentRow}>
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.paymentRowText}>Total : </Text>
-                    <Text style={styles.paymentRowText}>5099</Text>
+                    <Text style={styles.paymentRowText}>{data?.total_amount}</Text>
                 </View>
                 <Button title="Invoice"
                     onPress={() => setShowInvoice(true)}
@@ -111,7 +115,27 @@ function GetPayment() {
                 />
 
                 <Button title="Send"
-                    onPress={() => alert('here iss')}
+                    onPress={() => {
+                        jobList.jobCount = jobList.jobCount - 1;
+                        console.log('J OG LIST HERE  jobList: ', jobList);
+                        if (jobList.jobCount > 0) {
+                            const resetAction = StackActions.reset({
+                                index: 0,
+                                actions: [NavigationActions.navigate({
+                                    routeName: 'JobCompleted'
+                                })],
+                            });
+                            props.navigation.dispatch(resetAction);
+                        } else {
+                            const resetAction = StackActions.reset({
+                                index: 0,
+                                actions: [NavigationActions.navigate({
+                                    routeName: 'DayCompleted'
+                                })],
+                            });
+                            props.navigation.dispatch(resetAction);
+                        }
+                    }}
                     containerStyle={{ marginHorizontal: 50 }}
                 />
             </View>
