@@ -4,14 +4,16 @@ import { Divider } from 'react-native-elements';
 import CustomHeader from '../components/CustomHeader';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import * as colors from '../Themes/Color';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { getJobInvoice } from '../network/Network';
+import { Dialog } from 'react-native-simple-dialogs';
+import { WebView } from 'react-native-webview';
 
 function GetPayment() {
     const [radioValue, setRadioValue] = useState(0);
     const [radioText, setRadioText] = useState('');
     const [amount, setAmount] = useState('');
+    const [showInvoice, setShowInvoice] = useState(false);
     var radio_props = [
         { label: 'Cash', value: 0 },
         { label: 'Credit Card', value: 1 },
@@ -37,18 +39,37 @@ function GetPayment() {
                 setRadioText('Cash');
         }
     }
-    console.log('@ ! ! ! 1 1 1 1 : Amount ', amount);
+
+    function getInvoiceFromServer() {
+        getJobInvoice('21', result => {
+            console.log('1 1  1 1 1 1 Result Here . : ', result);
+        })
+    }
     return (
         <View style={{ flex: 1 }}>
             <CustomHeader
                 title="Get Payment"
             />
-
+            {/* <Dialog
+                visible={showInvoice}
+                onTouchOutside={() => setShowInvoice(false)} >
+                <View style={{ height: '80%' }}>
+                    <WebView source={{ uri: 'http://72.255.38.246:8080/api/get_job_invoice/eyJpdiI6IlVDVmRUVnRQRE5OMmVsdk4veHhQb3c9PSIsInZhbHVlIjoiWGhNNmJoUHVMcVlaYk8zcVdOVFlEZz09IiwibWFjIjoiZTUxNTQ0MGE1YTFhMDMwODg1ZWI2YmMyMzZhOTMwODhiNGI0ZmViM2U5M2VjNTdjNTg5MWE2YTJiOTNlNjFlNSJ9' }}
+                        style={{ width: '100%', height: '100%' }} />
+                </View>
+            </Dialog> */}
             <View style={styles.paymentRow}>
-                <Text style={styles.paymentRowText}>Total Payment : </Text>
-                <Text style={styles.paymentRowText}>5099</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.paymentRowText}>Total : </Text>
+                    <Text style={styles.paymentRowText}>5099</Text>
+                </View>
+                <Button title="Invoice"
+                    onPress={() => setShowInvoice(true)}
+                    containerStyle={{ width: 90, alignSelf: 'flex-end', }}
+                />
             </View>
             <Divider />
+
             <View style={styles.paymentMethodRow}>
                 <Text style={styles.paymentMethodText}>Payment Method :</Text>
                 <RadioForm
@@ -100,9 +121,11 @@ function GetPayment() {
 
 const styles = StyleSheet.create({
     paymentRow: {
-        margin: 15,
+        marginVertical: 15,
+        marginHorizontal: 8,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     paymentRowText: {
         fontSize: 18,
