@@ -7,7 +7,6 @@ import {
     Platform,
     Dimensions,
     Image,
-    Picker,
     Switch, Alert,
     TouchableOpacity,
 } from 'react-native';
@@ -15,6 +14,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Header, Input, Button, Icon } from 'react-native-elements';
 import { NavigationActions, StackActions } from "react-navigation";
 import { startBreak } from '../network/Network';
+import { Picker } from '@react-native-community/picker';
 
 let colors = require("../Themes/Color")
 

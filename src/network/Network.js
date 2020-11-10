@@ -11,7 +11,6 @@ class ApiNames {
     static getJobs = baseurl + 'get_jobs';
     static updateStatus = baseurl + 'status_change';
     static startBreak = baseurl + 'take_break';
-    static getJobInvoice = baseurl + 'get_job_invoice';
 }
 
 export async function getActiveJobs(callback) {
@@ -30,31 +29,6 @@ export async function getActiveJobs(callback) {
         body: JSON.stringify(params),
     };
     processNetworkRequest(ApiNames.getJobs, request, callback, 30000);
-}
-
-export async function getJobInvoice(jobId, callback) {
-
-    let userToken = await AsyncStorage.getItem('token');
-    console.log('T T T  TT T T TT T T T T T T  : ', userToken);
-    let url = `${ApiNames.getJobInvoice}/${jobId}?token=${userToken}`;
-    console.log('Here is URL  : ', url);
-    let request = {
-        method: 'GET',
-        headers: {
-            // 'Accept': 'application/json',
-            'Content-Type': 'application/pdf',
-            Authorization: 'Bearer ' + userToken
-        },
-    };
-    // processNetworkRequest(url, request, callback, 10000);
-    try {
-        let res = await fetch(url, request);
-        console.log('Result of fetch here.. : ', res);
-    }
-    catch (e) {
-        console.log('Fetch error  : ', e);
-    }
-
 }
 
 export async function doLogin(email, password, callback) {
